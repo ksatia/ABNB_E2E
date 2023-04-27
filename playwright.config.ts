@@ -23,6 +23,12 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // headless for CI, headed locally
+    headless: process.env.CI ? true : false,
+    // fail artifacts. this will save you 
+    screenshot: process.env.CI ? 'on' : 'on',
+    video: process.env.CI ? 'off' : 'on',
+
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
@@ -36,16 +42,16 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    /* these are unreliable at first, until you have the hang of things */
+    //{
+    //  name: 'firefox',
+    //  use: { ...devices['Desktop Firefox'] },
+    //},
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    //{
+    //  name: 'webkit',
+    //  use: { ...devices['Desktop Safari'] },
+    //},
 
     /* Test against mobile viewports. */
     // {
