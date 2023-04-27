@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: npx playwright install --with-deps chromium // this only needs to be all browsers if you use them all, otherwise it's sloooooow
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v3
@@ -24,4 +24,10 @@ jobs:
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30
+        retention-days: 2 // this will create huge files and you won't need them saved that long 
+    - uses: actions/upload-artifact@v3 // you'll want to save these results as well. It's screenshots 
+      if: failure()
+      with:
+        name: test-results
+        path: test-results/
+        retention-days: 2
