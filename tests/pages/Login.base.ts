@@ -22,7 +22,7 @@ class CheckoutPage extends BasePage {
 
     async enterAddress() {
         await this.page.getByRole('textbox', { name: this.streetAddress }).fill('108 Steuben Street')
-          await page.getByText('108 Steuben Street').first().click();
+          await this.page.getByText('108 Steuben Street').first().click();
     }
 
     async enterEmail() {
@@ -34,11 +34,11 @@ class CheckoutPage extends BasePage {
     }
 
     async saveInfoAndContinue() {
-        await page.getByRole('button', { name: 'Save & Continue' }).click();
+        await this.page.getByRole('button', { name: 'Save & Continue' }).click();
     }
 
     async acceptProposedAdress() {
-        await page.getByRole('button', { name: 'Use Proposed Address' }).click();
+        await this.page.getByRole('button', { name: 'Use Proposed Address' }).click();
     }
 
 
