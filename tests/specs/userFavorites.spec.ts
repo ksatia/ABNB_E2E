@@ -1,22 +1,26 @@
-// might not need chromium here since we have it set in the config.ts file
-import { test, expect } from '@playwright/test'
-const { chromium } = require('playwright');
+import { test } from '../fixtures/base.page'
+import { HomePage } from '../pages/HomePage.page';
 
-let browser, context, page
+// throw in a beforeEach block to open the webpage
+test.beforeEach(async ({ homePage }) => homePage.open());
 
-test.beforeAll(async () => {
-    let browser = await chromium.launc({headless: false})
-    let context = await browser.newContext()
-    let page = await context.newPage()
-  });
+test.describe('Logged in users should be able to see favorited listings', () => {
 
-test.afterAll(async () => {
-    await context.close()
-    await browser.close()
+    test('user should see hamburger menu options for authenticated accounts', async ({ homePage }) => {
+        await homePage.userIsLoggedIn()
+    }),
+
+    test('user should be able to create wishlist from first homepage suggestion', async ({homePage}) => {
+        await homePage.createWishlist('testWishlist')
+    }),
+
+    test('user should be able to delete wishlist from account wishlist page', async({homePage}) => {
+        await homePage.deleteWishlist('testWishlist')
+    })
+
+    test('user should be able to navigate to favorited listings via hamburger menu', async ({ homePage }) => {
+        await homePage.viewWishlists()
+    })
+
 })
 
-
-
-// study POM
-// create test block
-// create loginpage and see if we can authenticate it, store it to a browserContext and then use it in the favorites section

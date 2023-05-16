@@ -21,8 +21,8 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    // headless for CI, headed locally
-    headless: process.env.CI ? true : false,
+    // HEADLESS
+    //headless: process.env.CI ? true : false,
     // fail artifacts. this will save you 
     screenshot: process.env.CI ? 'on' : 'on',
     video: process.env.CI ? 'off' : 'on',
@@ -40,7 +40,10 @@ export default defineConfig({
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
+        //...devices['Desktop Chrome'],
+        // launchOptions: {
+        //   headless: true
+        // },
         storageState: 'playwright/.auth/user.json'
       },
       dependencies: ['setup'],
