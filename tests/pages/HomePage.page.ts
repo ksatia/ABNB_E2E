@@ -29,6 +29,8 @@ export class HomePage {
 
     async createWishlist(wishlistName: string) {
         await this.page.locator(this.firstHomeCardButton).click()
+        const saveListConfirmation = this.page.locator(this.saveListNameModal)
+        await 
         await this.page.locator(this.saveListNameModal).fill(wishlistName)
         let createButton = this.page.getByRole('button', { name: 'Create' })
         // createButton.waitFor()
@@ -41,22 +43,27 @@ export class HomePage {
 
     }
     async deleteWishlist(wishlistName: string) {
+        // visit wishlist page
         const accountMenu = this.page.getByTestId(this.profileHamburgerMenu)
         await accountMenu.waitFor()
         await accountMenu.click()
         await this.page.getByRole('link', { name: 'Wishlists' }).click()
-        // find delete button, click it
-        // verify via post response
+        // locate card based on name parameter passed in
         const wishlistTarget = this.page.getByRole('group', { name: wishlistName })
         await expect(wishlistTarget).toBeVisible()
         await wishlistTarget.hover()
-        // locate button after hover
+        // click delete button
         const deleteCardButton = this.page.getByRole('button', { name: `Delete ${wishlistName} - Not shared` })
         await expect(deleteCardButton).toBeVisible()
         await deleteCardButton.click()
+        // confirm deletion
         const modalDeleteConfirmation = this.page.getByRole('button', {name: 'Confirm deleting wishlist'})
         modalDeleteConfirmation.waitFor()
         await modalDeleteConfirmation.click()
+        // validate API response
+        const response = await this.page.waitForResponse((res) => res.url().includes('api/v3/DeleteWishlistMutation'))
+        const responseBody = JSON.parse(await response.text())
+        await expect(responseBody.data.deleteWishlist.statusCode).toBe('OK')   
     }
 
     // maybe add assertions to the actual spec file so that we can resuse this purely for navigation. 

@@ -10,16 +10,16 @@ test.describe('Logged in users should be able to see favorited listings', () => 
         await homePage.userIsLoggedIn()
     }),
 
-    test('user should be able to create wishlist from first homepage suggestion', async ({homePage}) => {
+    test('user should be able to navigate to favorited listings via hamburger menu', async ({ homePage }) => {
+        await homePage.viewWishlists()
+    }),
+
+    test('user should be able to create wishlist from first homepage suggestion', async ({ homePage }) => {
         await homePage.createWishlist('testWishlist')
     }),
 
-    test('user should be able to delete wishlist from account wishlist page', async({homePage}) => {
+    test('user should be able to delete wishlist from account wishlist page', async({ homePage }) => {
         await homePage.deleteWishlist('testWishlist')
-    })
-
-    test('user should be able to navigate to favorited listings via hamburger menu', async ({ homePage }) => {
-        await homePage.viewWishlists()
     })
 
 })
