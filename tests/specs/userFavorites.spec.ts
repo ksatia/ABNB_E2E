@@ -5,9 +5,10 @@ import { HomePage } from '../pages/HomePage.page';
 test.beforeEach(async ({ homePage }) => homePage.open());
 
 test.describe('Logged in users should be able to see favorited listings', () => {
-
-    test('user should see hamburger menu options for authenticated accounts', async ({ homePage }) => {
+    
+    test('user should be able to authenticate, create wishlists and delete wishlists', async ({ homePage }) => {
         await homePage.userIsLoggedIn()
+<<<<<<< Updated upstream
     }),
 
     test('user should be able to navigate to favorited listings via hamburger menu', async ({ homePage }) => {
@@ -20,6 +21,11 @@ test.describe('Logged in users should be able to see favorited listings', () => 
 
     test('user should be able to delete wishlist from account wishlist page', async({ homePage }) => {
         await homePage.deleteWishlist('testWishlist')
+=======
+        await homePage.createWishlist('testWishlist')
+        await homePage.deleteWishlist('testWishlist')
+        await homePage.viewWishlists()
+>>>>>>> Stashed changes
     })
 
 })
