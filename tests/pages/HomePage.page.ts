@@ -67,4 +67,9 @@ export class HomePage {
         await expect(this.page).toHaveTitle('Your lists · Wishlists - Airbnb')
     }
 
+    async visitAccountSettings() {
+        await this.page.getByTestId(this.profileHamburgerMenu).click()
+        await this.page.getByRole('link', {name: 'Account'}).click()
+        await expect(this.page).toHaveTitle('Account Settings - Airbnb')
+    }
 }
