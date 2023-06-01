@@ -15,7 +15,7 @@ test.describe('authentication dependent tests', () => {
 
     // test block for checking payment on file. if there isn't one on file, run a test to find and add payment card 
     test('user should be able to add payment methods to their account', async({homePage}) => {
-        
+
     })
 
 
@@ -26,3 +26,4 @@ test.describe('authentication dependent tests', () => {
     // find a way to test filters
 
 })
+
