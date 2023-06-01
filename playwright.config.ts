@@ -1,10 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+// dotenv for auth credentials
+require('dotenv').config({
+  path: __dirname + '/.env'
+});
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -23,8 +21,8 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    // headless for CI, headed locally
-    headless: process.env.CI ? true : false,
+    // HEADLESS
+    //headless: process.env.CI ? true : false,
     // fail artifacts. this will save you 
     screenshot: process.env.CI ? 'on' : 'on',
     video: process.env.CI ? 'off' : 'on',
@@ -38,9 +36,17 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        //...devices['Desktop Chrome'],
+        // launchOptions: {
+        //   headless: true
+        // },
+        storageState: 'playwright/.auth/user.json'
+      },
+      dependencies: ['setup'],
     },
     /* these are unreliable at first, until you have the hang of things */
     //{
