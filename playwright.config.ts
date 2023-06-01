@@ -22,7 +22,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     // HEADLESS
-    headless: process.env.CI ? false : false,
+  favorites-flow
+    headless: process.env.CI ? true : false,
     // fail artifacts. this will save you 
     screenshot: process.env.CI ? 'on' : 'on',
     video: process.env.CI ? 'off' : 'on',

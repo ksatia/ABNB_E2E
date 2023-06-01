@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.page'
 import { HomePage } from '../pages/HomePage.page';
 
@@ -14,8 +15,13 @@ test.describe('authentication dependent tests', () => {
     }),
 
     // test block for checking payment on file. if there isn't one on file, run a test to find and add payment card 
-    test('user should be able to add payment methods to their account', async({homePage}) => {
-
+    test('user should be able to add and remove payment methods to their account', async({homePage, accountSettingsPage, paymentsPage}) => {
+        await homePage.visitAccountSettings()
+        await accountSettingsPage.visitPaymentsPage()
+        const paymentAdditionSuccess = await paymentsPage.addNewPaymentMethod()
+        expect(paymentAdditionSuccess).toBe(true)
+        const paymentRemovalSuccess = await paymentsPage.removePaymentMethod()
+        expect (paymentRemovalSuccess).toBe(true)
     })
 
 
@@ -26,4 +32,3 @@ test.describe('authentication dependent tests', () => {
     // find a way to test filters
 
 })
-

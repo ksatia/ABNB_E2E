@@ -1,12 +1,23 @@
 import { test as base } from '@playwright/test';
 import { HomePage } from '../pages/HomePage.page';
+import { AccountSettingsPage } from '../pages/AccountSettingsPage.page';
+import { HomePage } from '../pages/HomePage.page';
+import { PaymentsPage } from '../pages/PaymentsPage.page';
 
 // extends the base to incude instances of each page class to destructure in tests
 export const test = base.extend<{
     homePage: HomePage;
+    accountSettingsPage: AccountSettingsPage;
+    paymentsPage: PaymentsPage;
 }>({
     homePage: async ({ page }, use) => {
         await use(new HomePage(page));
+    },
+    accountSettingsPage: async ({ page }, use) => {
+        await use(new AccountSettingsPage(page));
+    },
+    paymentsPage: async({page}, use) => {
+        await use(new PaymentsPage(page));
     }
 })
 
