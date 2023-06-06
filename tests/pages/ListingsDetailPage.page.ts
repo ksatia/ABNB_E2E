@@ -29,7 +29,7 @@ export class ListingDetailsPage {
         const year = currentDate.getFullYear()
         let departureMonth, departureYear, departureDay, returnDay, returnMonth, returnYear
         
-        /*
+        
         // if current month is December, jump to jan of following year for departure.
         // set departure to be 1st of next month
         if (month === 11) {
@@ -49,19 +49,14 @@ export class ListingDetailsPage {
             returnYear = departureYear
         }
 
-        // write recursive function to find the departure date and return date until condition is met where 
-        // the dates are available
-
-        // you will need to scroll the calendar into view. This will require quite a bit of logic.
-        // essentially a while loop where we look for the locator, and while it is NOT visible, keep scrolling
-        // once it is visible, click it. 
-        // must also check that the date is available ONCE it is found.
-        // it's possible we may be able to grab a giant array and find an efficient way to search it
-        console.log(`${day}/${departureMonth}/${departureYear}`)
-        await detailsPage.getByTestId(`calendar-day-${day}/${departureMonth}/${departureYear}`).click()
-        */
+        await detailsPage.getByTestId('change-dates-checkIn').click()
+        // await detailsPage.waitForTimeout(3000)
+        // //const clearDatesButton = await detailsPage.getByTestId('bookit-sidebar-availability-calendar').locator('div').filter({ hasText:'Check-in Checkout' }).getByRole('button', { name: 'Clear dates' })
+        // const clearDatesButton = await detailsPage.locator('#site-content > div > div:nth-child(1) > div:nth-child(3) > div > div._1s21a6e2 > div > div > div:nth-child(1) > div > div > div > div > div > div > div > div._wgmchy > div._p03egf > div > div:nth-child(2) > div > div._1aa8ytq > div._enjuap > div > div._16fg606i > div > button')
+        // await detailsPage.waitForTimeout(3000)
+        // await clearDatesButton.click({force: true})
+        
         //you can chain by getting testID, then locator with div, then filtering for text
-        // page.innerText(element)
     }
 }
 

@@ -16,11 +16,5 @@ test('user can search for properties based on location', async({homePage}) => {
 
 
 // @TODO refactor so that assertions happen in the spec file
-// @TODO refactor out some pages so that account 
 
-
-    // test block for viewing user account review
-
-    // test block for adding dates and finding pricing
-
-    // find a way to test filters
+    // test block for viewing user account review / user can sort by {} / user can filter by {}
